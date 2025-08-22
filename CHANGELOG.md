@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/mindevis/QMAdmin/compare/v0.1.0...v0.2.0) (2025-08-22)
+
+
+### Features
+
+* **ui:** Implement ModuleList and ApiKeyInput UI components; adjust API endpoint for module list ([893c216](https://github.com/mindevis/QMAdmin/commit/893c21631be5b1f47b7372bd487383c6c5000096))
+
 # [0.1.0](https://github.com/mindevis/QMAdmin/compare/v0.0.0...v0.1.0) (2025-08-19)
 
 
