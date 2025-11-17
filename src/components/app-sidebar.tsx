@@ -9,7 +9,6 @@ import {
   IconFileWord,
   IconFolder,
   IconHelp,
-  IconInnerShadowTop,
   IconListDetails,
   IconReport,
   IconSearch,
@@ -21,6 +20,7 @@ import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
+import { QMLogo } from "@/components/qm-logo"
 import {
   Sidebar,
   SidebarContent,
@@ -30,38 +30,39 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useAuth } from "@/hooks/use-auth"
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
       url: "#",
       icon: IconDashboard,
+      hidden: true,
     },
     {
       title: "Lifecycle",
       url: "#",
       icon: IconListDetails,
+      hidden: true,
     },
     {
       title: "Analytics",
       url: "#",
       icon: IconChartBar,
+      hidden: true,
     },
     {
       title: "Projects",
       url: "#",
       icon: IconFolder,
+      hidden: true,
     },
     {
       title: "Team",
       url: "#",
       icon: IconUsers,
+      hidden: true,
     },
   ],
   navClouds: [
@@ -134,21 +135,37 @@ const data = {
       name: "Data Library",
       url: "#",
       icon: IconDatabase,
+      hidden: true,
     },
     {
       name: "Reports",
       url: "#",
       icon: IconReport,
+      hidden: true,
     },
     {
       name: "Word Assistant",
       url: "#",
       icon: IconFileWord,
+      hidden: true,
     },
   ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth()
+  
+  // Use real user data or fallback to default
+  const userData = user ? {
+    name: user.username || user.email.split("@")[0],
+    email: user.email,
+    avatar: "/avatars/default.jpg",
+  } : {
+    name: "Guest",
+    email: "guest@example.com",
+    avatar: "/avatars/default.jpg",
+  }
+  
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -159,8 +176,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <QMLogo className="!size-5" />
+                <span className="text-base font-semibold">QMAdmin</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -172,7 +189,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
     </Sidebar>
   )

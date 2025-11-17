@@ -33,6 +33,7 @@ export function NavDocuments({
     name: string
     url: string
     icon: Icon
+    hidden?: boolean
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -42,7 +43,7 @@ export function NavDocuments({
       <SidebarGroupLabel>Documents</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <SidebarMenuItem key={item.name}>
+          <SidebarMenuItem key={item.name} className={item.hidden ? "hidden" : ""}>
             <SidebarMenuButton asChild>
               <a href={item.url}>
                 <item.icon />
@@ -81,7 +82,7 @@ export function NavDocuments({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
+        <SidebarMenuItem className="hidden">
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <IconDots className="text-sidebar-foreground/70" />
             <span>More</span>

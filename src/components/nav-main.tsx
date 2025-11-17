@@ -16,6 +16,7 @@ export function NavMain({
     title: string
     url: string
     icon?: Icon
+    hidden?: boolean
   }[]
 }) {
   return (
@@ -42,7 +43,7 @@ export function NavMain({
         </SidebarMenu>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
+            <SidebarMenuItem key={item.title} className={item.hidden ? "hidden" : ""}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
